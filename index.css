@@ -25,19 +25,24 @@ body {
     color: #F3F6F9;
 }
 .movies_list {
+    padding-top: 50px;
+    padding-bottom: 50px;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    align-items: center;
     flex-direction: column;
+    border-radius: 20px;
     background-color: #232323;
 }
 .movies_add {
+    gap: 20px;
     display: flex;
+    align-self: start;
     flex-direction: row;
 }
 .movies_input {
-    margin-left: 10px;
-    margin-right: 20px;
+    margin-bottom: 30px;
+    margin-left: 80px;
     width: 411px;
     height: 50px;
     opacity: 50%;
@@ -62,13 +67,69 @@ body {
 .movies_btn:hover {
     background-color: #7c50ff;
 }
+.movies_close_btn {
+    border: none;
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+    background: url(./close.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .movies_movie_block {
-
+    display: inline-block;
     width: 790px;
     height: 71px;
     border-radius: 10px;
     background-color: #3A3939;
 }
+.movie_check {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    list-style-type: circle;
+    width: 19px;
+    height: 19px;
+    color: #F3F6F9;
+    opacity: 30%;
+}
+.movie_check+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+.movie_check+label::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #F3F6F9;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    opacity: 30%;
+  }
+  .movie_check:not(:disabled):not(:checked)+label:hover::before {
+    border-color: #F3F6F9;
+  }
+  .movie_check:not(:disabled):active+label::before {
+    background-color: #F3F6F9;
+    border-color: #F3F6F9;
+    opacity: 30%;
+  }
+  .movie_check:checked+label::before {
+    border-color: #F3F6F9 ;
+    background-color: #6532F8;
+    opacity: 30%;
+    
+  }
+  .movie_check:disabled+label::before {
+    background-color: #e9ecef;
+  }
 /* .:after {
     background: linear-gradient(
         180deg,

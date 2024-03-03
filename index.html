@@ -26,9 +26,20 @@
           <button class="js-movies-btn movies_btn"></button>
         </div>
         <div class="movies_movie_block">
-          <li style="list-style: circle"></li>
-          <p class="js-movies-movie movies_movie"></p>
-          <btn class="js-movies-close-btn movies_close_btn"></btn>
+          <ul>
+            <li>
+              <input
+                type="radio"
+                class="movie_check"
+                id="movie_check"
+                name="movie"
+                value="yes"
+              />
+              <label for="movie_check"></label>
+            </li>
+            <!-- <li><p class="js-movies-movie movies_movie"></p></li> -->
+            <li><div class="js-movies-close-btn movies_close_btn"></div></li>
+          </ul>
         </div>
       </div>
     </section>
