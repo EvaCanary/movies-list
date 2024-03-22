@@ -1,47 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./index.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet" />
     <title>Document</title>
-  </head>
-  <body>
+</head>
+
+<body class="main">
     <section class="movies">
-      <div>
-        <h1 class="movies_title">СПИСОК ФИЛЬМОВ</h1>
-        <p class="movies_title">2024</p>
-      </div>
-      <p class="movies_look">Посмотреть</p>
-      <div class="movies_list">
-        <div class="movies_add">
-          <input class="js-movies-input movies_input" type="text" />
-          <button class="js-movies-btn movies_btn"></button>
+        <div class="movies__header">
+            <h1 class="movies__title">СПИСОК ФИЛЬМОВ</h1>
+            <p class="movies__lable">2024</p>
         </div>
-        <div class="movies_movie_block">
-          <ul>
-            <li>
-              <input
-                type="radio"
-                class="movie_check"
-                id="movie_check"
-                name="movie"
-                value="yes"
-              />
-              <label for="movie_check"></label>
-            </li>
-            <!-- <li><p class="js-movies-movie movies_movie"></p></li> -->
-            <li><div class="js-movies-close-btn movies_close_btn"></div></li>
-          </ul>
+        <p class="movies__subtitle">Посмотреть</p>
+        <div class="movies__inner">
+            <form class="movies__form">
+                <input class="js-movies-input movies__input" type="text" placeholder="Добавить фильм" />
+                <button class="js-movies-btn movies__btn"></button>
+            </form>
+            <ul class="movies__list">
+                <li class="movies__item">
+                    <label class="js-movies-checkox movies__item-lable">
+                        <input type="checkbox" class="movies__item-checkbox" id="movies__item-checkbox" name="movie"
+                            value="yes" />
+                        <span class="js-movies__item-title movies__item-title"></span>
+                    </label>
+                    <button class="js-movies-close-btn movies__close-btn"></button>
+                </li>
+            </ul>
         </div>
-      </div>
     </section>
-  </body>
+    <script src="./index.js"></script>
+</body>
+
 </html>
