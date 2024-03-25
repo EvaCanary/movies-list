@@ -1,5 +1,5 @@
 let posts = [];
-const TITLE_VALIDATION_LIMIT = 20;
+const MAX_TITLE_LENGTH = 20;
 
 const postTitleInputNode = document.querySelector(".js-movies-input");
 const newPostBtnNode = document.querySelector(".js-movies-btn");
@@ -8,66 +8,74 @@ const postSpanNode = document.querySelector(".js-movies__item-title");
 const closePostBtnNode = document.querySelector(".js-movies-close-btn");
 const moviesListNode = document.querySelector(".movies__list");
 
-newPostBtnNode.onclick = function () {
-  moviesListNode.innerHTML = ` 
-  <ul class="movies__list">
-  <li class='movies__item'>
-  <label class="js-movies-checkox movies__item-lable">
-  <input type="checkbox" class="movies__item-checkbox" id="movies__item-checkbox" name="movie"
-  value="yes" />
-  <span class='movies__item-title'>${postTitleInputNode.value}</span>
-  </label>
-  <button class="js-movies-close-btn movies__close-btn"></button>
-  </li>
-  </ul>`;
+const validation = (title) => {
+  let result = true;
+
+  if (title === "") {
+    result = false;
+    return result;
+  }
+  if (title.length > MAX_TITLE_LENGTH) {
+    result = false;
+    return result;
+  }
+  return result;
 };
-console.log(postTitleInputNode.value);
-newPostBtnNode.addEventListener("click", function () {
-  validation();
-  const titleLen = postTitleInputNode.value;
 
-  if (titleLen === "") {
-    return;
-  }
-  const postFromUser = getPostFromUser();
-  addPost(postFromUser);
-  renderPosts();
-});
-
-postTitleInputNode.addEventListener("input", validation);
-
-function validation() {
-  const titleLen = postTitleInputNode.value.length;
-
-  if (titleLen === "") {
-    validationMessage.innerText = `Длинна текста не должна превышать ${TITLE_VALIDATION_LIMIT} символов`;
-    validationMessage.classList.remove("validationMessage_hidden");
-    return;
-  }
-  validationMessage.classList.add("validationMessage_hidden");
-}
-function getPostFromUser() {
+const getPostFromUser = () => {
   const title = postTitleInputNode.value;
+  return title;
+};
 
-  return {
-    text: title,
-  };
+function renderPosts(posts) {
+  console.log(posts);
+  moviesListNode.innerHTML = "";
+  posts.forEach((post) => {
+    const movieItem = document.createElement("li");
+    const movieLabel = document.createElement("label");
+    const movieInput = document.createElement("input");
+    const movieTitle = document.createElement("span");
+    const movieCloseBtn = document.createElement("button");
+
+    movieItem.className = "movies__item";
+    movieLabel.className = "js-movies-checkbox movies__item-label";
+    movieInput.className = "movies__item-checkbox";
+    movieTitle.className = "movies__item-title";
+    movieCloseBtn.className = "js-movies-close-btn movies__close-btn";
+
+    movieInput.setAttribute("unchecked", "");
+    movieInput.setAttribute("type", "checkbox");
+
+    movieTitle.innerText = post;
+
+    moviesListNode.appendChild(movieItem);
+    movieItem.appendChild(movieLabel);
+    movieLabel.appendChild(movieInput);
+    movieLabel.appendChild(movieTitle);
+    movieItem.appendChild(movieCloseBtn);
+  });
 }
-// function renderPosts() {
-//   let postsHTML = "";
-//   posts.forEach((post) => {
-//     postsHTML += `
-//         <ul class='movies__list'>
-//         <li class='movies__item'>
-//         <label class="js-movies-checkox movies__item-lable">
-//                         <input type="checkbox" class="movies__item-checkbox" id="movies__item-checkbox" name="movie"
-//                             value="yes" />
-//         <span class='movies__item-title'>${post.title}</span>
-//         </label>
-//         <button class="js-movies-close-btn movies__close-btn"></button>
-//         </li>
-//         </ul>`;
-//   });
 
-//   postsNode.innerHTML = postsHTML;
-// }
+const handler = (event) => {
+  event.preventDefault();
+  const title = getPostFromUser();
+  if (!validation(title)) {
+    return;
+  }
+  posts.push(title);
+  renderPosts(posts);
+};
+
+newPostBtnNode.addEventListener("click", handler);
+
+// const getPostFromUser = () => {
+//   return postTitleInputNode.value;
+// };
+
+// const handler = (event) => {
+//   event.preventDefault();
+//   const title = getPostFromUser();
+//   console.log(title);
+// };
+
+// newPostBtnNode.addEventListener("click", handler);
