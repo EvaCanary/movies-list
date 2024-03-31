@@ -1,11 +1,11 @@
-let posts = [];
+let movies = [];
 const MAX_TITLE_LENGTH = 20;
 
-const postTitleInputNode = document.querySelector(".js-movies-input");
-const newPostBtnNode = document.querySelector(".js-movies-btn");
-const postLabelNode = document.querySelector(".movies__item-checkbox");
-const postSpanNode = document.querySelector(".js-movies__item-title");
-const closePostBtnNode = document.querySelector(".js-movies-close-btn");
+const movieTitleInputNode = document.querySelector(".js-movies-input");
+const newMovieBtnNode = document.querySelector(".js-movies-btn");
+const movieLabelNode = document.querySelector(".movies__item-checkbox");
+const movieSpanNode = document.querySelector(".js-movies__item-title");
+const closeMovieBtnNode = document.querySelector(".js-movies-close-btn");
 const moviesListNode = document.querySelector(".movies__list");
 
 const validation = (title) => {
@@ -22,15 +22,23 @@ const validation = (title) => {
   return result;
 };
 
-const getPostFromUser = () => {
-  const title = postTitleInputNode.value;
+const getMovieFromUser = () => {
+  const title = movieTitleInputNode.value;
   return title;
 };
 
-function renderPosts(posts) {
-  console.log(posts);
+const createMovie = (title) => {
+  const movie = {
+    name: title,
+    id: `${Math.random()}`,
+  };
+  movies.push(movie);
+};
+
+const renderMovies = (movies) => {
+  console.log(movies);
   moviesListNode.innerHTML = "";
-  posts.forEach((post) => {
+  movies.forEach((movie) => {
     const movieItem = document.createElement("li");
     const movieLabel = document.createElement("label");
     const movieInput = document.createElement("input");
@@ -43,31 +51,58 @@ function renderPosts(posts) {
     movieTitle.className = "movies__item-title";
     movieCloseBtn.className = "js-movies-close-btn movies__close-btn";
 
-    movieInput.setAttribute("unchecked", "");
+    // movieInput.setAttribute("unchecked", "");
     movieInput.setAttribute("type", "checkbox");
 
-    movieTitle.innerText = post;
+    movieTitle.innerText = movie.name;
+    movieItem.dataset.id = movie.id;
+    movieCloseBtn.dataset.id = movie.id;
 
     moviesListNode.appendChild(movieItem);
     movieItem.appendChild(movieLabel);
     movieLabel.appendChild(movieInput);
     movieLabel.appendChild(movieTitle);
     movieItem.appendChild(movieCloseBtn);
+
+    movieCloseBtn.addEventListener("click", () => {
+      const id = movieItem.dataset.id;
+      removeButton(movies, id);
+    });
   });
-}
+};
+
+// const closeBtn = (movies, id) => {
+//   let newMoviesArr = movies.filter((movie) => {
+//     return id !== movie.id;
+//   });
+//   renderMovies(newMoviesArr);
+// };
+
+const removeButton = (movies, id) => {
+  movies.forEach((movie, index) => {
+    if (movie.id === id) {
+      movies.splice(index, 1);
+    }
+  });
+  renderMovies(movies);
+};
+
+const clearInput = () => {
+  movieTitleInputNode.value = "";
+};
 
 const handler = (event) => {
   event.preventDefault();
-  const title = getPostFromUser();
+  const title = getMovieFromUser();
+  clearInput();
   if (!validation(title)) {
     return;
   }
-  posts.push(title);
-  renderPosts(posts);
+  createMovie(title);
+  renderMovies(movies);
 };
 
-newPostBtnNode.addEventListener("click", handler);
-
+newMovieBtnNode.addEventListener("click", handler);
 // const getPostFromUser = () => {
 //   return postTitleInputNode.value;
 // };
