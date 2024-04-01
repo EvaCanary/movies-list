@@ -141,6 +141,10 @@
   color: #f3f6f9;
 }
 
-.movies__item-checkbox:checked + .movies__item-label + .movies__item {
+/* .movies__item:has(.movies__item-checkbox:checked) {
+  opacity: 0.5;
+} */
+
+.movies__item_active {
   opacity: 0.5;
 }

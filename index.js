@@ -64,6 +64,10 @@ const renderMovies = (movies) => {
     movieLabel.appendChild(movieTitle);
     movieItem.appendChild(movieCloseBtn);
 
+    movieItem.addEventListener("click", () => {
+      movieItem.classList.toggle("movie__item");
+      movieItem.classList.toggle("movies__item_active");
+    });
     movieCloseBtn.addEventListener("click", () => {
       const id = movieItem.dataset.id;
       removeButton(movies, id);
@@ -77,7 +81,6 @@ const renderMovies = (movies) => {
 //   });
 //   renderMovies(newMoviesArr);
 // };
-
 const removeButton = (movies, id) => {
   movies.forEach((movie, index) => {
     if (movie.id === id) {
@@ -103,6 +106,7 @@ const handler = (event) => {
 };
 
 newMovieBtnNode.addEventListener("click", handler);
+movieLabelNode.addEventListener("click", handler);
 // const getPostFromUser = () => {
 //   return postTitleInputNode.value;
 // };
