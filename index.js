@@ -47,7 +47,7 @@ const renderMovies = (movies) => {
 
     movieItem.className = "movies__item";
     movieLabel.className = "js-movies-checkbox movies__item-label";
-    movieInput.className = "movies__item-checkbox";
+    movieInput.className = "movies__item-checkbox movies__checkbox";
     movieTitle.className = "movies__item-title";
     movieCloseBtn.className = "js-movies-close-btn movies__close-btn";
 
@@ -64,10 +64,10 @@ const renderMovies = (movies) => {
     movieLabel.appendChild(movieTitle);
     movieItem.appendChild(movieCloseBtn);
 
-    movieItem.addEventListener("click", () => {
-      movieItem.classList.toggle("movie__item");
+    movieInput.addEventListener("click", () => {
       movieItem.classList.toggle("movies__item_active");
     });
+    console.log(movieItem);
     movieCloseBtn.addEventListener("click", () => {
       const id = movieItem.dataset.id;
       removeButton(movies, id);
@@ -106,7 +106,7 @@ const handler = (event) => {
 };
 
 newMovieBtnNode.addEventListener("click", handler);
-movieLabelNode.addEventListener("click", handler);
+// movieLabelNode.addEventListener("click");
 // const getPostFromUser = () => {
 //   return postTitleInputNode.value;
 // };
