@@ -29,6 +29,7 @@ const getMovieFromUser = () => {
 
 const createMovie = (title) => {
   const movie = {
+    checked: false,
     name: title,
     id: `${Math.random()}`,
   };
@@ -51,9 +52,8 @@ const renderMovies = (movies) => {
     movieTitle.className = "movies__item-title";
     movieCloseBtn.className = "js-movies-close-btn movies__close-btn";
 
-    // movieInput.setAttribute("unchecked", "");
     movieInput.setAttribute("type", "checkbox");
-
+    movieInput.checked = movie.checked;
     movieTitle.innerText = movie.name;
     movieItem.dataset.id = movie.id;
     movieCloseBtn.dataset.id = movie.id;
@@ -64,8 +64,13 @@ const renderMovies = (movies) => {
     movieLabel.appendChild(movieTitle);
     movieItem.appendChild(movieCloseBtn);
 
+    if (movie.checked) {
+      movieItem.classList.add("movies__item_active");
+    }
+
     movieInput.addEventListener("click", () => {
       movieItem.classList.toggle("movies__item_active");
+      movie.checked = movieInput.checked;
     });
     console.log(movieItem);
     movieCloseBtn.addEventListener("click", () => {
@@ -75,12 +80,6 @@ const renderMovies = (movies) => {
   });
 };
 
-// const closeBtn = (movies, id) => {
-//   let newMoviesArr = movies.filter((movie) => {
-//     return id !== movie.id;
-//   });
-//   renderMovies(newMoviesArr);
-// };
 const removeButton = (movies, id) => {
   movies.forEach((movie, index) => {
     if (movie.id === id) {
@@ -106,15 +105,3 @@ const handler = (event) => {
 };
 
 newMovieBtnNode.addEventListener("click", handler);
-// movieLabelNode.addEventListener("click");
-// const getPostFromUser = () => {
-//   return postTitleInputNode.value;
-// };
-
-// const handler = (event) => {
-//   event.preventDefault();
-//   const title = getPostFromUser();
-//   console.log(title);
-// };
-
-// newPostBtnNode.addEventListener("click", handler);
